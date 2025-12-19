@@ -594,3 +594,5 @@ npm start
 - **Database Name:** `aws_ecommerce_db`
 
 Happy coding! 🎉
+
+Best
