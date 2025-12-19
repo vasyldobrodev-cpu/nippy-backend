@@ -1,0 +1,22 @@
+CREATE TABLE notifications (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL,
+    email_notifications BOOLEAN DEFAULT FALSE,
+    new_freelancer_proposals BOOLEAN DEFAULT FALSE,
+    job_status_updates BOOLEAN DEFAULT FALSE,
+    new_message_alerts_web BOOLEAN DEFAULT FALSE,
+    new_message_alerts_email BOOLEAN DEFAULT FALSE,
+    message_read_receipts BOOLEAN DEFAULT FALSE,
+    platform_updates BOOLEAN DEFAULT FALSE,
+    promotions_offers BOOLEAN DEFAULT FALSE,
+    push_notifications BOOLEAN DEFAULT FALSE,
+    desktop_notifications BOOLEAN DEFAULT FALSE,
+    mobile_push_notifications BOOLEAN DEFAULT FALSE,
+    notification_frequency VARCHAR(10) DEFAULT 'realtime' CHECK (notification_frequency IN ('realtime', 'daily', 'weekly')),
+    quiet_hours_enabled BOOLEAN DEFAULT FALSE,
+    quiet_hours_weekends BOOLEAN DEFAULT FALSE,
+    quiet_hours_from TIME,
+    quiet_hours_to TIME,
+    notification_sound VARCHAR(3) DEFAULT 'on' CHECK (notification_sound IN ('on', 'off')),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
